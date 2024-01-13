@@ -7,7 +7,7 @@ on:
 
 env:
   # update with the name of the main binary
-  binary: bevy_github_ci_template
+  binary: pong
   add_binaries_to_github_release: true
   #itch_target: <itch.io-username>/<game-name>
 
@@ -205,7 +205,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: aarch64-apple-darwin
-      - name: Environment 
+      - name: Environment
         # macOS 11 was the first version to support ARM
         run: |
           export MACOSX_DEPLOYMENT_TARGET="11"
