@@ -172,7 +172,7 @@ fn handle_create_ball(
     mut materials: ResMut<Assets<ColorMaterial>>,
     ball_query: Query<&Ball>,
 ) {
-    if let None = ball_query.iter().next() {
+    if ball_query.iter().next().is_none() {
         commands
             .spawn(MaterialMesh2dBundle {
                 mesh: meshes
@@ -234,11 +234,7 @@ fn handle_paddle_collision(
         let paddle = paddle_query.iter().find(|paddle| {
             let paddle_x = paddle.translation.x;
 
-            if ball.velocity.x > 0.0 {
-                return ball_x < paddle_x;
-            } else {
-                return ball_x > paddle_x;
-            }
+            ball.velocity.x > 0.0 && ball_x < paddle_x || ball.velocity.x < 0.0 && ball_x > paddle_x
         });
 
         if let Some(paddle_transform) = paddle {
@@ -259,7 +255,7 @@ fn handle_destroy_ball(mut commands: Commands, mut ball_query: Query<(Entity, &B
     if let Ok((entity, _, transform)) = ball_query.get_single_mut() {
         let ball_x = transform.translation.x;
 
-        if ball_x < -ARENA_WIDTH / 2.0 || ARENA_WIDTH / 2.0 < ball_x {
+        if !(-ARENA_WIDTH / 2.0..=ARENA_WIDTH / 2.0).contains(&ball_x) {
             commands.entity(entity).despawn();
         }
     }
