@@ -75,7 +75,10 @@ pub fn setup(
         });
 }
 
-pub fn paddle_movement(time: Res<Time>, mut paddle_input_query: Query<(&PaddleInput, &mut Transform)>) {
+pub fn paddle_movement(
+    time: Res<Time>,
+    mut paddle_input_query: Query<(&PaddleInput, &mut Transform)>,
+) {
     for (paddle_input, mut transform) in paddle_input_query.iter_mut() {
         let direction = (paddle_input.up as i32 - paddle_input.down as i32) as f32;
 
@@ -195,7 +198,10 @@ pub fn handle_paddle_collision(
     }
 }
 
-pub fn handle_destroy_ball(mut commands: Commands, mut ball_query: Query<(Entity, &Ball, &Transform)>) {
+pub fn handle_destroy_ball(
+    mut commands: Commands,
+    mut ball_query: Query<(Entity, &Ball, &Transform)>,
+) {
     if let Ok((entity, _, transform)) = ball_query.get_single_mut() {
         let ball_x = transform.translation.x;
 

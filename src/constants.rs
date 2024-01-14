@@ -15,4 +15,3 @@ pub const ARENA_HEIGHT: f32 = 600.0;
 pub const ARENA_PADDING: f32 = 30.0;
 pub const ARENA_WALL_COLOR: Color = Color::rgb(0.5, 0.5, 0.5);
 pub const ARENA_WALL_HEIGHT: f32 = 25.0;
-
